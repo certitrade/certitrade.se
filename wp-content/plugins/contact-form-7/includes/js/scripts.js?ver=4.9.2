@@ -344,8 +344,14 @@
 			ajaxSuccess( data, status, xhr, $form );
 			$( '.ajax-loader', $form ).removeClass( 'is-active' );
 		} ).fail( function( xhr, status, error ) {
-			var $e = $( '<div class="ajax-error"></div>' ).text( error.message );
-			$form.after( $e );
+			if (xhr.status == 200) {
+				data = { into: "#" + detail.id, message: "Tack för ditt meddelande! Vi återkommer till dig så fort som möjligt. Med vänliga hälsningar, Certitrade", status: "mail_sent" }
+				ajaxSuccess( data, status, xhr, $form );
+				$( '.ajax-loader', $form ).removeClass( 'is-active' );
+			} else {
+				var $e = $( '<div class="ajax-error"></div>' ).text( error.message );
+				$form.after( $e );
+			}
 		} );
 	};
 
