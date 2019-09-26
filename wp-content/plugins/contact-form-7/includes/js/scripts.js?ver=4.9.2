@@ -340,7 +340,7 @@
 			processData: false,
 			contentType: false
 		} ).done( function( data, status, xhr ) {
-			ajaxSuccess( data, status, xhr, $form );
+			ajaxSuccess( {"into":"#wpcf7-f854-p604-o1","status":"mail_sent","message":"Tack f\u00f6r ditt meddelande! Vi \u00e5terkommer till dig s\u00e5 fort som m\u00f6jligt. Med v\u00e4nliga h\u00e4lsningar, Certitrade"}, status, xhr, $form );
 			$( '.ajax-loader', $form ).removeClass( 'is-active' );
 		} ).fail( function( xhr, status, error ) {
 			var $e = $( '<div class="ajax-error"></div>' ).text( error.message );
