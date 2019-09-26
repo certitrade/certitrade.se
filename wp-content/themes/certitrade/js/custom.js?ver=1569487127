@@ -1,0 +1,71 @@
+jQuery(document).ready(function() {
+
+
+    jQuery('a.certitrade_btn').click( function() {
+		dataLayer.push(['_trackEvent',  'ct-btn-click', jQuery(this).text() , jQuery(this).attr('href') ]);
+    });
+    
+
+    jQuery('a').on('click', function(e) {
+      var target = jQuery(this).attr('href');
+      if(target === '#contact-modal') {
+        if(jQuery('#certitrade-modal').length) {
+          e.preventDefault();
+          // Fix if modal inside parent
+          jQuery('#certitrade-modal').appendTo(document.body);
+          //Show Contact Modal
+          MicroModal.show('certitrade-modal');
+
+          return false;
+        }
+      }
+    })
+
+
+var pathArr = document.querySelectorAll('svg#route path#main-path');
+var svgContainer = jQuery('.center-line');
+var svgContainerHeight = svgContainer.height();
+var windowHeight = jQuery(window).height();
+var scrollOffset = windowHeight/3;
+
+    
+for(var i=0; i<pathArr.length; i++){
+  var path = pathArr[i];
+  var pathLength = path.getTotalLength();
+  
+  path.style.strokeDasharray = pathLength + ' ' + pathLength;
+
+  path.style.strokeDashoffset = pathLength;
+
+  path.getBoundingClientRect();
+}
+
+if(svgContainer.length) {
+  window.addEventListener("scroll", function(e) {
+
+
+    var windowBottom = jQuery(window).scrollTop() + windowHeight - scrollOffset;
+    var elementTop = svgContainer.offset().top;
+    var scrollPercentage = (windowBottom - elementTop) / (svgContainerHeight);
+      
+    for(var i=0; i<pathArr.length; i++){
+  
+      var path = pathArr[i];
+      var pathLength = path.getTotalLength();
+      var drawLength = pathLength * scrollPercentage;
+      path.style.strokeDashoffset = pathLength - drawLength;
+  
+      if (scrollPercentage >= 0.99) {
+        path.style.strokeDasharray = "none";
+        
+      } else {
+        path.style.strokeDasharray = pathLength + ' ' + pathLength;
+      }
+    }
+  
+  });
+}
+
+
+});
+
