@@ -345,7 +345,7 @@
 			$( '.ajax-loader', $form ).removeClass( 'is-active' );
 		} ).fail( function( xhr, status, error ) {
 			if (xhr.status == 200) {
-				data = { into: "#" + detail.id, message: "Tack för ditt meddelande! Vi återkommer till dig så fort som möjligt. Med vänliga hälsningar, Certitrade", status: "mail_sent" }
+				const data = { into: "#" + detail.id, message: "Tack för ditt meddelande! Vi återkommer till dig så fort som möjligt. Med vänliga hälsningar, Certitrade", status: "mail_sent" }
 				ajaxSuccess( data, "success", xhr, $form );
 				$( '.ajax-loader', $form ).removeClass( 'is-active' );
 			} else {
